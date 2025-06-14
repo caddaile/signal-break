@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     private float shootCooldown = 0.8f;
     private float lastShootTime = 0f;
 
+    private Vector2 moveInput;
+    private Vector2 lookInput;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -23,25 +26,13 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var actions = GetComponent<PlayerInput>().actions;
-        Vector2 movementInput = actions["Move"].ReadValue<Vector2>();
-        Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
+        Vector3 move = new Vector3(moveInput.x, 0, moveInput.y);
         rb.MovePosition(rb.position + move * moveSpeed * Time.fixedDeltaTime);
-
-        // Check last used device
-        if (Gamepad.current != null && (movementInput.magnitude > 0.1f))
-        {
-            lastUsedGamepad = true;
-        }
-        else if (Mouse.current != null && Mouse.current.delta.ReadValue().sqrMagnitude > 0.01f)
-        {
-            lastUsedGamepad = false;
-        }
 
         if (!lastUsedGamepad && Mouse.current != null)
         {
             Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-            Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+            Plane groundPlane = new Plane(Vector3.up, transform.position);
 
             if (groundPlane.Raycast(ray, out float enter))
             {
@@ -57,18 +48,42 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        else
+        else if (lookInput.sqrMagnitude > 0.1f)
         {
-            Vector2 lookInput = actions["Look"].ReadValue<Vector2>();
-            if (lookInput.sqrMagnitude > 0.1f)
-            {
-                Vector3 lookDirection = new Vector3(lookInput.x, 0, lookInput.y);
-                Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
-                Quaternion smoothRotation = Quaternion.Slerp(rb.rotation, targetRotation, 10f * Time.fixedDeltaTime);
-                rb.MoveRotation(smoothRotation);
-            }
+            Vector3 lookDirection = new Vector3(lookInput.x, 0, lookInput.y);
+            Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
+            Quaternion smoothRotation = Quaternion.Slerp(rb.rotation, targetRotation, 10f * Time.fixedDeltaTime);
+            rb.MoveRotation(smoothRotation);
         }
     }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
+    }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        lookInput = context.ReadValue<Vector2>();
+
+        if (context.control.device is Gamepad)
+        {
+            lastUsedGamepad = true;
+        }
+        else
+        {
+            lastUsedGamepad = false;
+        }
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            isShooting = true;
+        else if (context.canceled)
+            isShooting = false;
+    }
+
     private void Shoot()
     {
         if (bulletPrefab == null || shootOrigin == null) return;
@@ -80,14 +95,6 @@ public class PlayerController : MonoBehaviour
             bulletScript.speed = bulletSpeed;
             bulletScript.damage = 2f;
         }
-    }
-
-    public void OnAttack(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-            isShooting = true;
-        else if (context.canceled)
-            isShooting = false;
     }
 
     private void Update()
