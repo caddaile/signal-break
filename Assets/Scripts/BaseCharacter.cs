@@ -4,11 +4,18 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class BaseCharacter : MonoBehaviour
 {
-    public float Health = 10f;
-
+    [SerializeField] private HealthBar healthBar;
+    public float maxHealth = 10f;
+    private float currentHealth;
     private Rigidbody rb;
 
-    private void Awake()
+    protected virtual void Start()
+    {
+        currentHealth = maxHealth;
+        UpdateHealthBar();
+    }
+
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
         rb.linearDamping = 10f;
@@ -17,13 +24,20 @@ public class BaseCharacter : MonoBehaviour
     // Takes damage, returns if it is now dead 
     public bool TakeDamage(float damage)
     {
-        Health -= MathF.Max(0, damage);
+        currentHealth -= MathF.Max(0, damage);
 
-        return Health <= 0;
+        UpdateHealthBar();
+
+        return currentHealth <= 0;
     }
 
     public void Die()
     {
         Destroy(gameObject);
+    }
+
+    void UpdateHealthBar()
+    {
+        healthBar.UpdateHealthBar(maxHealth, currentHealth);
     }
 }

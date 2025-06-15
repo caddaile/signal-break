@@ -7,8 +7,9 @@ public class Enemy : BaseCharacter
     private Transform target;
     private NavMeshAgent agent;
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         agent = GetComponent<NavMeshAgent>();
         agent.speed = 1.5f;
     }

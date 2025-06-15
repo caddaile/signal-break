@@ -39,7 +39,6 @@ public class Bullet : MonoBehaviour
             }
 
             trail.transform.parent = null;
-            Destroy(trail, 1f);
 
             Destroy(gameObject);
         }

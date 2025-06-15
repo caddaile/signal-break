@@ -77,7 +77,10 @@ MonoBehaviour:
   moveSpeed: 5
   bulletPrefab: {fileID: 5134168718561533905, guid: bf4a4feceaf564fd0943ffbf66a8c2a9, type: 3}
   shootOrigin: {fileID: 205836061956557389}
-  bulletSpeed: 20
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  enableAimAssist: 1
 --- !u!114 &224033435159859265
 MonoBehaviour:
   m_ObjectHideFlags: 0

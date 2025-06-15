@@ -6,7 +6,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform shootOrigin;
-    [SerializeField] private float bulletSpeed = 20f;
+    [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private bool enableAimAssist = true;
 
     private Rigidbody rb;
     private bool lastUsedGamepad = false;
@@ -50,8 +51,44 @@ public class PlayerController : MonoBehaviour
         }
         else if (lookInput.sqrMagnitude > 0.1f)
         {
-            Vector3 lookDirection = new Vector3(lookInput.x, 0, lookInput.y);
+            Vector3 lookDirection = new Vector3(lookInput.x, 0, lookInput.y).normalized;
+            Vector3 playerPosition = transform.position;
+
+            if (enableAimAssist)
+            {
+                Collider[] enemies = Physics.OverlapSphere(playerPosition, 5f, enemyLayer);
+                Transform bestTarget = null;
+                float bestDot = 0.93f; // tighter cone ~25°
+
+                foreach (Collider enemy in enemies)
+                {
+                    Vector3 toEnemy = (enemy.transform.position - playerPosition).normalized;
+                    toEnemy.y = 0;
+
+                    float dot = Vector3.Dot(lookDirection, toEnemy);
+                    if (dot > bestDot)
+                    {
+                        bestDot = dot;
+                        bestTarget = enemy.transform;
+                    }
+                }
+
+                if (bestTarget != null)
+                {
+                    Vector3 targetDir = (bestTarget.position - playerPosition).normalized;
+                    targetDir.y = 0;
+                    lookDirection = targetDir;
+                }
+            }
+
             Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
+            Quaternion smoothRotation = Quaternion.Slerp(rb.rotation, targetRotation, 10f * Time.fixedDeltaTime);
+            rb.MoveRotation(smoothRotation);
+        }
+        else if (lastUsedGamepad && moveInput.sqrMagnitude > 0.1f)
+        {
+            Vector3 moveDirection = new Vector3(moveInput.x, 0, moveInput.y);
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
             Quaternion smoothRotation = Quaternion.Slerp(rb.rotation, targetRotation, 10f * Time.fixedDeltaTime);
             rb.MoveRotation(smoothRotation);
         }
@@ -92,7 +129,7 @@ public class PlayerController : MonoBehaviour
         Bullet bulletScript = bullet.GetComponent<Bullet>();
         if (bulletScript != null)
         {
-            bulletScript.speed = bulletSpeed;
+            bulletScript.speed = 30f;
             bulletScript.damage = 2f;
         }
     }
