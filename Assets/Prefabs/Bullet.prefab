@@ -145,7 +145,7 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_MaskInteraction: 0
-  m_Autodestruct: 0
+  m_Autodestruct: 1
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
 --- !u!1 &5134168718561533905
@@ -199,6 +199,7 @@ MonoBehaviour:
   speed: 5
   damage: 2
   trail: {fileID: 1444479635177134377}
+  hitParticlePrefab: {fileID: 2620554319800322055, guid: 2eab801fc9c7b4475bd2fe781d97b92e, type: 3}
 --- !u!135 &3828886012228987898
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ public class Bullet : MonoBehaviour
     public float speed = 5f;
     public float damage = 2f;
     public GameObject trail;
+    public GameObject hitParticlePrefab;
 
     void Start()
     {
@@ -21,6 +22,12 @@ public class Bullet : MonoBehaviour
         if (!other.transform.root.CompareTag("Player"))
         {
             if (other.GetComponent<SphereCollider>()) return;
+
+            if (hitParticlePrefab)
+            {
+                GameObject hitParticle = Instantiate(hitParticlePrefab, transform.position, Quaternion.LookRotation(-transform.forward));
+                Destroy(hitParticle, 1f);
+            }
 
             Rigidbody rb = other.attachedRigidbody;
             if (rb != null)
