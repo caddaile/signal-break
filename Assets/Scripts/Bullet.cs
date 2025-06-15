@@ -26,7 +26,7 @@ public class Bullet : MonoBehaviour
             if (hitParticlePrefab)
             {
                 GameObject hitParticle = Instantiate(hitParticlePrefab, transform.position, Quaternion.LookRotation(-transform.forward));
-                Destroy(hitParticle, 1f);
+                Destroy(hitParticle, 5f);
             }
 
             Rigidbody rb = other.attachedRigidbody;
