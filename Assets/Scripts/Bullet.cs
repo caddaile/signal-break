@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
     public float damage = 2f;
     public GameObject trail;
     public GameObject hitParticlePrefab;
+    public GameObject missParticlePrefab;
 
     void Start()
     {
@@ -24,11 +25,21 @@ public class Bullet : MonoBehaviour
             if (other.GetComponent<SphereCollider>()) return;
 
             if (other.transform.root.CompareTag("Enemy"))
+            {
                 if (hitParticlePrefab)
                 {
                     GameObject hitParticle = Instantiate(hitParticlePrefab, transform.position, Quaternion.LookRotation(-transform.forward));
                     Destroy(hitParticle, 5f);
                 }
+            }
+            else if (!other.transform.root.CompareTag("Enemy"))
+            {
+                if (missParticlePrefab)
+                {
+                    GameObject missParticle = Instantiate(missParticlePrefab, transform.position, Quaternion.LookRotation(-transform.forward));
+                    Destroy(missParticle, 5f);
+                }
+            }
 
             Rigidbody rb = other.attachedRigidbody;
             if (rb != null)

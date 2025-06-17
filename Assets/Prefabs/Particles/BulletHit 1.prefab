@@ -57,7 +57,7 @@ VisualEffect:
       m_Array: []
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 0.126, y: 0.126, z: 0.126, w: 0}
+      - m_Value: {x: 5.992157, y: 1.3346789, z: 0.028264958, w: 0}
         m_Name: Color
         m_Overridden: 1
     m_Uint:
@@ -127,7 +127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 521748723479821455}
   m_Layer: 0
-  m_Name: BulletHit
+  m_Name: BulletHit 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

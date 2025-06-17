@@ -200,6 +200,7 @@ MonoBehaviour:
   damage: 2
   trail: {fileID: 1444479635177134377}
   hitParticlePrefab: {fileID: 2620554319800322055, guid: 2eab801fc9c7b4475bd2fe781d97b92e, type: 3}
+  missParticlePrefab: {fileID: 8764192080386499411, guid: df3587637d38b4a71a6e36a828f857eb, type: 3}
 --- !u!135 &3828886012228987898
 SphereCollider:
   m_ObjectHideFlags: 0

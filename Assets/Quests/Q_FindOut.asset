@@ -16,6 +16,6 @@ MonoBehaviour:
   description: 
   goals:
   - description: Search for clues
-    targetID: clue
+    targetID: find_clue
     requiredAmount: 4
     currentAmount: 0
