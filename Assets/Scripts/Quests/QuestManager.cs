@@ -24,13 +24,19 @@ public class QuestManager : MonoBehaviour
         OnQuestUpdated?.Invoke();
     }
 
-    public void UpdateGoalProgress(string id, int amount = 1)
+    public void UpdateGoalProgress(QuestTargetType id, int amount = 1)
     {
         if (activeQuest == null) return;
 
         foreach (var goal in activeQuest.goals)
         {
-            goal.RegisterProgress(id, amount);
+            bool IsComplete = goal.RegisterProgress(id, amount);
+            if (IsComplete)
+            {
+                int i = activeQuest.goals.IndexOf(goal);
+                if (i + 1 < activeQuest.goals.Count)
+                    activeQuest.goals[i + 1].Reveal();
+            }
         }
 
         if (activeQuest.IsComplete)
@@ -80,7 +86,8 @@ public class QuestManager : MonoBehaviour
                 description = goal.description,
                 targetID = goal.targetID,
                 requiredAmount = goal.requiredAmount,
-                currentAmount = 0
+                currentAmount = 0,
+                isHidden = goal.isHidden
             };
             newQuest.goals.Add(newGoal);
         }

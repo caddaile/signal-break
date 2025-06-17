@@ -31,6 +31,8 @@ public class QuestUI : MonoBehaviour
         ClearGoals();
         foreach (var goal in quest.goals)
         {
+            if (goal.isHidden) continue;
+
             var entry = Instantiate(goalEntryPrefab, goalsContainer);
             var text = entry.GetComponentInChildren<TextMeshProUGUI>();
             text.text = $"{goal.description} ({goal.currentAmount}/{goal.requiredAmount})";

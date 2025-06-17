@@ -33,7 +33,7 @@ public class BaseCharacter : MonoBehaviour
 
     public void Die()
     {
-        GameEvents.GoalProgress("kill_infected", 1);
+        GameEvents.GoalProgress(QuestTargetType.KillInfected, 1);
         Destroy(gameObject);
     }
 
