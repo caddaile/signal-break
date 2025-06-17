@@ -19,7 +19,7 @@ public class EnemySpawner : MonoBehaviour
 
     private List<GameObject> spawnQueue = new();
 
-    private void Start()
+    public void SpawnEnemies()
     {
         foreach (var data in enemiesToSpawn)
         {

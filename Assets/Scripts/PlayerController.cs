@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveInput;
     private Vector2 lookInput;
 
+    // Track the current loot the player is near
+    private LootBase currentLoot;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -121,6 +124,14 @@ public class PlayerController : MonoBehaviour
             isShooting = false;
     }
 
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.performed && currentLoot != null)
+        {
+            currentLoot.OnInteract();
+        }
+    }
+
     private void Shoot()
     {
         if (bulletPrefab == null || shootOrigin == null) return;
@@ -140,6 +151,22 @@ public class PlayerController : MonoBehaviour
         {
             Shoot();
             lastShootTime = Time.time;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out LootBase loot))
+        {
+            currentLoot = loot;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent(out LootBase loot) && loot == currentLoot)
+        {
+            currentLoot = null;
         }
     }
 }

@@ -29,4 +29,10 @@ public class Enemy : BaseCharacter
             target = other.transform;
         }
     }
+
+    public override void Die()
+    {
+        GameEvents.GoalProgress(QuestTargetType.KillInfected, 1);
+        base.Die();
+    }
 }

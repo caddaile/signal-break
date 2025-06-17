@@ -31,9 +31,8 @@ public class BaseCharacter : MonoBehaviour
         return currentHealth <= 0;
     }
 
-    public void Die()
+    public virtual void Die()
     {
-        GameEvents.GoalProgress(QuestTargetType.KillInfected, 1);
         Destroy(gameObject);
     }
 

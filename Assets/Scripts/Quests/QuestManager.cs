@@ -83,8 +83,9 @@ public class QuestManager : MonoBehaviour
         {
             var newGoal = new QuestGoal
             {
+                goalId = goal.goalId,
                 description = goal.description,
-                targetID = goal.targetID,
+                targetType = goal.targetType,
                 requiredAmount = goal.requiredAmount,
                 currentAmount = 0,
                 isHidden = goal.isHidden
