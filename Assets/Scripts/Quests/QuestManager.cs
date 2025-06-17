@@ -44,7 +44,17 @@ public class QuestManager : MonoBehaviour
     private void AdvanceToNextQuest()
     {
         currentQuestIndex++;
-        activeQuest = CloneQuest(questChain.GetQuestAt(currentQuestIndex));
+        var nextQuest = questChain.GetQuestAt(currentQuestIndex);
+        if (nextQuest != null)
+        {
+            activeQuest = CloneQuest(nextQuest);
+
+        }
+        else
+        {
+            activeQuest = null; // no more quests
+            Debug.Log("Quest chain completed!");
+        }
     }
 
     void OnEnable()
@@ -60,7 +70,6 @@ public class QuestManager : MonoBehaviour
     private Quest CloneQuest(Quest original)
     {
         var newQuest = ScriptableObject.CreateInstance<Quest>();
-        newQuest.questID = original.questID;
         newQuest.title = original.title;
         newQuest.description = original.description;
         newQuest.goals = new System.Collections.Generic.List<QuestGoal>();

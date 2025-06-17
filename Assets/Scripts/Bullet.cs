@@ -23,11 +23,12 @@ public class Bullet : MonoBehaviour
         {
             if (other.GetComponent<SphereCollider>()) return;
 
-            if (hitParticlePrefab)
-            {
-                GameObject hitParticle = Instantiate(hitParticlePrefab, transform.position, Quaternion.LookRotation(-transform.forward));
-                Destroy(hitParticle, 5f);
-            }
+            if (other.transform.root.CompareTag("Enemy"))
+                if (hitParticlePrefab)
+                {
+                    GameObject hitParticle = Instantiate(hitParticlePrefab, transform.position, Quaternion.LookRotation(-transform.forward));
+                    Destroy(hitParticle, 5f);
+                }
 
             Rigidbody rb = other.attachedRigidbody;
             if (rb != null)
