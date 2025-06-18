@@ -4,6 +4,8 @@ public abstract class LootBase : MonoBehaviour
 {
     public abstract QuestTargetType TargetType { get; }
 
+    [TextArea] public string displayText;
+
     protected virtual void OnPlayerEnter()
     {
         // Show interaction prompt

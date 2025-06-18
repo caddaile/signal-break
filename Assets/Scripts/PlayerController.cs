@@ -128,6 +128,11 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed && currentLoot != null)
         {
+            if (currentLoot is Clue clue)
+            {
+                Debug.Log(clue.displayText);
+            }
+
             currentLoot.OnInteract();
         }
     }

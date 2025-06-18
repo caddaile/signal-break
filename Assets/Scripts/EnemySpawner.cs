@@ -14,10 +14,18 @@ public class EnemySpawnData
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private List<EnemySpawnData> enemiesToSpawn;
-    [SerializeField] private List<Transform> spawnPoints;
+    private List<Transform> spawnPoints = new();
     [SerializeField] private float spawnInterval = 2f;
 
     private List<GameObject> spawnQueue = new();
+
+    void Start()
+    {
+        foreach (Transform child in transform)
+        {
+            spawnPoints.Add(child);
+        }
+    }
 
     public void SpawnEnemies()
     {
