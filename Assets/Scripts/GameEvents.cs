@@ -2,9 +2,10 @@ using System;
 
 public enum QuestTargetType
 {
-    KillInfected,
-    SurviveWave,
-    FindClue
+    Slain,
+    Survive,
+    Collect,
+    Visit
 }
 public static class GameEvents
 {

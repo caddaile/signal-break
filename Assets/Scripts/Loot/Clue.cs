@@ -1,6 +1,6 @@
 public class Clue : LootBase
 {
-    public override QuestTargetType TargetType => QuestTargetType.FindClue;
+    public override QuestTargetType TargetType => QuestTargetType.Collect;
 
     public override void OnInteract()
     {

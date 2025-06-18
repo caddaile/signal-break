@@ -32,7 +32,7 @@ public class Enemy : BaseCharacter
 
     public override void Die()
     {
-        GameEvents.GoalProgress(QuestTargetType.KillInfected, 1);
+        GameEvents.GoalProgress(QuestTargetType.Slain, 1);
         base.Die();
     }
 }

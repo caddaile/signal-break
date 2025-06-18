@@ -1225,7 +1225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0964dbce3fac4471cac0230d097b3dec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  matchGoalId: intro_find_clue_4
+  matchGoalId: intro_search_clues
   onGoalCompleted:
     m_PersistentCalls:
       m_Calls:

@@ -7,9 +7,9 @@ public class QuestManager : MonoBehaviour
 
     [SerializeField] private QuestChain questChain;
     private int currentQuestIndex = 0;
-    private Quest activeQuest;
+    private QuestChain.Quest activeQuest;
 
-    public Quest ActiveQuest => activeQuest;
+    public QuestChain.Quest ActiveQuest => activeQuest;
 
     void Start()
     {
@@ -73,18 +73,20 @@ public class QuestManager : MonoBehaviour
         GameEvents.OnGoalProgress -= UpdateGoalProgress;
     }
 
-    private Quest CloneQuest(Quest original)
+    private QuestChain.Quest CloneQuest(QuestChain.Quest original)
     {
-        var newQuest = ScriptableObject.CreateInstance<Quest>();
-        newQuest.title = original.title;
-        newQuest.description = original.description;
-        newQuest.goals = new System.Collections.Generic.List<QuestGoal>();
+        var newQuest = new QuestChain.Quest
+        {
+            title = original.title,
+            goals = new System.Collections.Generic.List<QuestChain.QuestGoal>()
+        };
+
         foreach (var goal in original.goals)
         {
-            var newGoal = new QuestGoal
+            var newGoal = new QuestChain.QuestGoal
             {
-                goalId = goal.goalId,
-                description = goal.description,
+                relay = goal.relay,
+                title = goal.title,
                 targetType = goal.targetType,
                 requiredAmount = goal.requiredAmount,
                 currentAmount = 0,
@@ -92,6 +94,7 @@ public class QuestManager : MonoBehaviour
             };
             newQuest.goals.Add(newGoal);
         }
+
         return newQuest;
     }
 }
