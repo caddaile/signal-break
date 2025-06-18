@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14b88c55e56c94e2595a3faf9fa951a6, type: 3}
+  m_Name: Q_FindOutWhatHappened
+  m_EditorClassIdentifier: 
+  title: Find out what happened
+  description: 
+  goals:
+  - goalId: intro_find_clue_4
+    description: Search for clues
+    targetType: 2
+    requiredAmount: 4
+    currentAmount: 0
+    isHidden: 0
+  - goalId: 
+    description: Survive the infected
+    targetType: 0
+    requiredAmount: 4
+    currentAmount: 0
+    isHidden: 1
