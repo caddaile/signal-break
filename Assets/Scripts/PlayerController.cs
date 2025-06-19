@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform shootOrigin;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private bool enableAimAssist = true;
+    [SerializeField] private ChatBubble chatBubblePrefab;
 
     private Rigidbody rb;
     private bool lastUsedGamepad = false;
@@ -131,6 +132,7 @@ public class PlayerController : MonoBehaviour
             if (currentLoot is Clue clue)
             {
                 Debug.Log(clue.displayText);
+                chatBubblePrefab.ShowMessage(clue.displayText);
             }
 
             currentLoot.OnInteract();
