@@ -34,8 +34,9 @@ public class QuestUI : MonoBehaviour
             if (goal.isHidden) continue;
 
             var entry = Instantiate(goalEntryPrefab, goalsContainer);
-            var text = entry.GetComponentInChildren<TextMeshProUGUI>();
-            text.text = $"{goal.title} ({goal.currentAmount}/{goal.requiredAmount})";
+            var text = entry.GetComponentsInChildren<TextMeshProUGUI>();
+            text[0].text = goal.title;
+            text[1].text = $"{goal.currentAmount}/{goal.requiredAmount}";
             currentEntries.Add(entry);
         }
     }
