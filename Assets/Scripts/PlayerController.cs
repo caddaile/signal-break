@@ -131,7 +131,6 @@ public class PlayerController : MonoBehaviour
         {
             if (currentLoot is Clue clue)
             {
-                Debug.Log(clue.displayText);
                 chatBubblePrefab.ShowMessage(clue.displayText);
             }
 

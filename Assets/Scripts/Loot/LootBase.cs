@@ -6,16 +6,14 @@ public abstract class LootBase : MonoBehaviour
 
     [TextArea] public string displayText;
 
-    protected virtual void OnPlayerEnter()
+    void OnPlayerEnter()
     {
-        // Show interaction prompt
-        Debug.Log("Pick up");
+        TooltipManager.Instance?.ShowTooltip(transform);
     }
 
-    protected virtual void OnPlayerExit()
+    void OnPlayerExit()
     {
-        // Hide interaction prompt
-        Debug.Log("Exiting Pick up");
+        TooltipManager.Instance?.HideTooltip();
     }
 
     public virtual void OnInteract()
@@ -25,7 +23,7 @@ public abstract class LootBase : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.transform.root.CompareTag("Player"))
         {
             OnPlayerEnter();
         }
@@ -33,7 +31,7 @@ public abstract class LootBase : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.transform.root.CompareTag("Player"))
         {
             OnPlayerExit();
         }
