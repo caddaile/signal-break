@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7845083892619268202}
   - component: {fileID: 6849298463467594332}
   - component: {fileID: 7080212685997174208}
-  m_Layer: 5
+  m_Layer: 30
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 115, y: -12.825}
+  m_AnchoredPosition: {x: 120, y: -17.825}
   m_SizeDelta: {x: 220, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &728592762436541555
@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 5769066226583978898}
   - component: {fileID: 3904544939131318485}
   - component: {fileID: 2768763207860751191}
-  m_Layer: 5
+  m_Layer: 30
   m_Name: ChatBubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &5769066226583978898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 6767186963180093567}
   - component: {fileID: 3259913713664832636}
   - component: {fileID: 4587109812212032810}
-  m_Layer: 5
+  m_Layer: 30
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -392,10 +392,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 5
-    m_Right: 5
-    m_Top: 5
-    m_Bottom: 5
+    m_Left: 10
+    m_Right: 10
+    m_Top: 10
+    m_Bottom: 10
   m_ChildAlignment: 0
   m_Spacing: 0
   m_ChildForceExpandWidth: 0

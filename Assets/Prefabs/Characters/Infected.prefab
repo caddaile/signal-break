@@ -100,6 +100,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 8767773619715988445}
   maxHealth: 10
+  attackRange: 2
+  attackCooldown: 1.5
+  damage: 2
 --- !u!135 &3533328874168337987
 SphereCollider:
   m_ObjectHideFlags: 0

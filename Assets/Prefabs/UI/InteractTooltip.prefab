@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7845083892619268202}
   - component: {fileID: 6849298463467594332}
   - component: {fileID: 7080212685997174208}
-  m_Layer: 5
+  m_Layer: 30
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 8969047085777573140}
   - component: {fileID: 5769066226583978898}
   - component: {fileID: 6996868045450614599}
-  m_Layer: 5
+  m_Layer: 30
   m_Name: InteractTooltip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,7 +233,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 32767
   m_TargetDisplay: 0
 --- !u!114 &8969047085777573140
 MonoBehaviour:
@@ -257,7 +257,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &5769066226583978898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,7 +300,7 @@ GameObject:
   - component: {fileID: 6767186963180093567}
   - component: {fileID: 3259913713664832636}
   - component: {fileID: 4587109812212032810}
-  m_Layer: 5
+  m_Layer: 30
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}

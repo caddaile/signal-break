@@ -6,7 +6,7 @@ public class BaseCharacter : MonoBehaviour
 {
     [SerializeField] private HealthBar healthBar;
     public float maxHealth = 10f;
-    private float currentHealth;
+    protected float currentHealth;
     private Rigidbody rb;
 
     protected virtual void Start()
@@ -25,6 +25,7 @@ public class BaseCharacter : MonoBehaviour
     public bool TakeDamage(float damage)
     {
         currentHealth -= MathF.Max(0, damage);
+        Debug.Log($"{transform.name} taking {damage} damage, health is {currentHealth}");
 
         UpdateHealthBar();
 
@@ -36,8 +37,9 @@ public class BaseCharacter : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void UpdateHealthBar()
+    protected virtual void UpdateHealthBar()
     {
-        healthBar.UpdateHealthBar(maxHealth, currentHealth);
+        if (healthBar)
+            healthBar.UpdateHealthBar(maxHealth, currentHealth);
     }
 }
