@@ -28,8 +28,14 @@ public class TooltipManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (tooltipInstance != null && targetTransform != null)
+        if (tooltipInstance != null)
         {
+            if (targetTransform == null)
+            {
+                HideTooltip();
+                return;
+            }
+
             tooltipInstance.transform.position = targetTransform.position + offset;
         }
     }
