@@ -6,10 +6,10 @@ using System.Linq;
 [CreateAssetMenu(menuName = "Quest/Quest Chain")]
 public class QuestChain : ScriptableObject
 {
-    public List<Quest> quests;
+    public List<Quest> Quests;
 
 
-    public Quest GetQuestAt(int index) => index >= 0 && index < quests.Count ? quests[index] : null;
+    public Quest GetQuestAt(int index) => index >= 0 && index < Quests.Count ? Quests[index] : null;
 
     [Serializable]
     public class Quest

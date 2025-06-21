@@ -4,7 +4,7 @@ public abstract class LootBase : MonoBehaviour
 {
     public abstract QuestTargetType TargetType { get; }
 
-    [TextArea] public string displayText;
+    [TextArea] public string DisplayText;
 
     void OnPlayerEnter()
     {

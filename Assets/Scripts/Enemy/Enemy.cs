@@ -7,11 +7,15 @@ public class Enemy : BaseCharacter
     [SerializeField] private float attackRange = 2f;
     [SerializeField] private float attackCooldown = 1.5f;
     [SerializeField] private int damage = 2;
+    [SerializeField] private float lungeForce = 15f;
+    [SerializeField] private float lungeDuration = 0.3f;
+    [SerializeField] private AttackCollider attackCollider;
 
     private float lastAttackTime = 0f;
 
     private Transform target;
     private NavMeshAgent agent;
+    private bool isLunging = false;
 
     protected override void Start()
     {
@@ -22,7 +26,7 @@ public class Enemy : BaseCharacter
 
     void Update()
     {
-        if (target != null)
+        if (target != null && !isLunging)
         {
             agent.SetDestination(target.position);
 
@@ -45,11 +49,26 @@ public class Enemy : BaseCharacter
     private void TryAttackPlayer()
     {
         lastAttackTime = Time.time;
-        var player = target.GetComponent<Player>();
-        if (player != null)
-        {
-            player.TakeDamage(damage);
-        }
+        StartCoroutine(LungeForward());
+    }
+
+    private System.Collections.IEnumerator LungeForward()
+    {
+        isLunging = true;
+        agent.enabled = false;
+
+        attackCollider.enabled = true;
+        attackCollider.Damage = damage;
+
+        Vector3 lungeDirection = (target.position - transform.position).normalized;
+        rb.AddForce(lungeDirection * lungeForce, ForceMode.VelocityChange);
+
+        yield return new WaitForSeconds(lungeDuration);
+
+        rb.linearVelocity = Vector3.zero;
+        attackCollider.enabled = false;
+        agent.enabled = true;
+        isLunging = false;
     }
 
     public override void Die()

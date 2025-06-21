@@ -7,8 +7,8 @@ using UnityEngine;
 [System.Serializable]
 public class EnemySpawnData
 {
-    public GameObject prefab;
-    public int count;
+    public GameObject Prefab;
+    public int Count;
 }
 
 public class EnemySpawner : MonoBehaviour
@@ -31,9 +31,9 @@ public class EnemySpawner : MonoBehaviour
     {
         foreach (var data in enemiesToSpawn)
         {
-            for (int i = 0; i < data.count; i++)
+            for (int i = 0; i < data.Count; i++)
             {
-                spawnQueue.Add(data.prefab);
+                spawnQueue.Add(data.Prefab);
             }
         }
 

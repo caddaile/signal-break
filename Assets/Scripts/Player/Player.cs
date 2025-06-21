@@ -12,7 +12,7 @@ public class Player : BaseCharacter
 
         Transform healthBar = statsUI.PlayerHealthBar.transform;
 
-        float healthPercent = currentHealth / maxHealth;
+        float healthPercent = Mathf.Clamp(currentHealth / maxHealth, 0, 1);
 
         healthBar.localScale = new Vector3(healthPercent, healthBar.localScale.y, healthBar.localScale.z);
     }

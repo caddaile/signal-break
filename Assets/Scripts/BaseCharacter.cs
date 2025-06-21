@@ -7,7 +7,7 @@ public class BaseCharacter : MonoBehaviour
     [SerializeField] private HealthBar healthBar;
     public float maxHealth = 10f;
     protected float currentHealth;
-    private Rigidbody rb;
+    protected Rigidbody rb;
 
     protected virtual void Start()
     {
@@ -24,7 +24,7 @@ public class BaseCharacter : MonoBehaviour
     // Takes damage, returns if it is now dead 
     public bool TakeDamage(float damage)
     {
-        currentHealth -= MathF.Max(0, damage);
+        currentHealth = MathF.Max(0, currentHealth - damage);
         Debug.Log($"{transform.name} taking {damage} damage, health is {currentHealth}");
 
         UpdateHealthBar();
